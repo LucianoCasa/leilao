@@ -3,16 +3,17 @@ package bid_entity
 import (
 	"context"
 	"fullcycle-auction_go/internal/internal_error"
-	"github.com/google/uuid"
 	"time"
+
+	"github.com/google/uuid"
 )
 
 type Bid struct {
-	Id        string
-	UserId    string
-	AuctionId string
-	Amount    float64
-	Timestamp time.Time
+	Id        string    `json:"id"`
+	UserId    string    `json:"user_id"`
+	AuctionId string    `json:"auction_id"`
+	Amount    float64   `json:"amount"`
+	Timestamp time.Time `json:"timestamp"`
 }
 
 func CreateBid(userId, auctionId string, amount float64) (*Bid, *internal_error.InternalError) {

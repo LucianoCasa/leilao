@@ -1,0 +1,59 @@
+@auction_id = "0bc6c570-83ee-4f65-828e-12dcc83e9218";
+@user01 = "11111111-2222-3333-4444-555555555555";
+@user02 = "22222222-4444-5555-6666-777777777777";
+
+
+### Criar leilão
+POST http://localhost:8080/auction
+Content-Type: application/json
+
+{
+  "product_name": "PlayStation 5",
+  "category": "eletronics",
+  "description": "Console PS5 seminovo com 2 controles",
+  "condition": 0
+}
+
+
+curl -X POST "http://localhost:8080/bid" -H "Content-Type: application/json" -d "{\"auction_id\":\"0bc6c570-83ee-4f65-828e-12dcc83e9218\",\"user_id\":\"11111111-2222-3333-4444-555555555555\",\"amount\":1000}"
+
+curl -X POST "http://localhost:8080/bid" -H "Content-Type: application/json" -d "{\"auction_id\":\"3b0c4592-c1ea-4721-9d09-6afe65bca8f1\",\"user_id\":\"22222222-4444-5555-6666-777777777777\",\"amount\":1500}"
+
+curl -X GET "http://localhost:8080/auction/3b0c4592-c1ea-4721-9d09-6afe65bca8f1"
+
+curl -X GET "http://localhost:8080/auction/winner/0bc6c570-83ee-4f65-828e-12dcc83e9218"
+###
+
+### Primeiro lance
+POST http://localhost:8080/bid
+Content-Type: application/json
+
+{
+  "auction_id": {{auction_id}},
+  "user_id": {{user01}},
+  "amount": 1000.00
+}
+
+###
+
+### Segundo lance (maior que o primeiro)
+POST http://localhost:8080/bid
+Content-Type: application/json
+
+{
+  "auction_id": {{auction_id}},
+  "user_id": {{user02}},
+  "amount": 1500
+}
+
+###
+
+### Status do leilão
+GET http://localhost:8080/auction/{{auction_id}}
+
+###
+
+### Consultar o vencedor
+GET http://localhost:8080/auction/{{auction_id}}/winner
+
+###
