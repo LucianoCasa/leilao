@@ -11,7 +11,7 @@ import (
 )
 
 func TestAutoCloseAuction(t *testing.T) {
-	// Configura duração curta para o teste
+
 	_ = os.Setenv("AUCTION_DURATION", "2s")
 
 	ctx := context.Background()
@@ -37,7 +37,6 @@ func TestAutoCloseAuction(t *testing.T) {
 		t.Fatalf("failed to persist auction: %v", err)
 	}
 
-	// Aguarda um pouco mais que a duração
 	time.Sleep(3 * time.Second)
 
 	got, ierr := repo.FindAuctionById(ctx, auctionEntity.Id)
